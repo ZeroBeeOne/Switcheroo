@@ -1,51 +1,51 @@
+
+
 // The host values must be hostnames (without protocol or trailing slashs)
 // The mobile objects are comprised of type (qs for querystring or d for subdomain) and are arranged similar to Sams, mobile theme plugin
 // for querystring use the entire string which would be used for mobile (eg 'v=m'), for subdomain use the subdomain without trailing dots (eg 'mobile')
-var DEV_HOST = 'fill.me.in.com',
-	STAGING_HOST = 'fill.me.in.com',
-	LIVE_HOST = 'fill.me.in.com',
-	DEV_MOBILE = {
-		'type' : 'qs',
-		'value' : 'v=m'
-	},
-	STAGING_MOBILE = {
-		'type' : 'qs',
-		'value' : 'v=m'
-	},
-	LIVE_MOBILE = {
-		'type' : 'd',
-		'value' : 'm'
-	};
-
+var HOSTS = [
+	{
+		'ID' : 'development',
+		'hostname' : 'fill.me.in.com',
+		'mobile_type' : 'qs',
+		'mobile_val' ; 'v=m'
+	},{
+		'ID' : 'staging',
+		'hostname' : 'fill.me.in.com',
+		'mobile_type' : 'd',
+		'mobile_val' ; 'm'
+	}
+];
 
 var current_host = window.location.hostname;
 
-// I don't want to answer a dialog on every switch, so just do dev->staging->live->dev
+// I don't want to answer a dialog on every switch, so always just switch to the next item (or the first item from last)
+var redirected = false;
+$.each(HOSTS, function(i,el){
+	var next;
+	if (current_host.search(el.hostname) != -1) {
+		if (i == HOSTS.length-1) {
+			next = 0;
+		} else {
+			next = ++i;
+		}
+		redirect(HOSTS[i], HOSTS[next]);
+		redirected = true;
+		return false;
+	}
+});
 
-// are we on the live site?
-if (LIVE_HOST && current_host.search(LIVE_HOST) != -1) {
-	// Then redirect to dev
-	redirect(LIVE_HOST,LIVE_MOBILE,DEV_HOST,DEV_MOBILE);
-
-} else if (DEV_HOST && current_host.search(DEV_HOST) != -1) {// Or the dev site?
-	// then redirect to staging
-	redirect(DEV_HOST,DEV_MOBILE,STAGING_HOST,STAGING_MOBILE);
-
-} else if (STAGING_HOST && current_host.search(STAGING_HOST) != -1) {// Or the staging site?
-	// then redirect to live
-	redirect(STAGING_HOST,STAGING_MOBILE,LIVE_HOST,LIVE_MOBILE);
-
-} else {
+if (!redirected) {
 	console.log('I appear to be lost...');
 }
 
-function checkForMobile(host, check) {
-	switch (check.type) {
+function checkForMobile(host) {
+	switch (host.mobile_type) {
 		case 'qs':
-			return getQueryString(check.value);
+			return getQueryString(host.mobile_val);
 			break;
 		case 'd':
-			return (current_host == check.value + '.' + host);
+			return (current_host == host.mobile_val + '.' + host.hostname);
 			break;
 	}
 	return false;
@@ -56,27 +56,27 @@ function getQueryString(qs) {
 	return (url.indexOf('?' + qs) != -1 || url.indexOf('&' + qs) != -1 );
 }
 
-function redirect(fromHost,fromMobile,toHost,toMobile) {
+function redirect(fromHost,toHost) {
 	var gotoUrl = window.location.protocol + '//',
 		path = window.location.href.replace(gotoUrl + window.location.host,'');
-	if (checkForMobile(fromHost, fromMobile)) {
-		if (toMobile.type == 'd') {
+	if (checkForMobile(fromHost)) {
+		if (toHost.mobile_type == 'd') {
 			// use the subdomain
-			gotoUrl += toMobile.value + '.';
+			gotoUrl += toHost.mobile_val + '.';
 		}
-		gotoUrl += toHost;
+		gotoUrl += toHost.hostname;
 		gotoUrl += path;
-		if (toMobile.type == 'qs') {
+		if (toHost.mobile_type == 'qs') { // TODO : fix double adding the querystring
 			if (gotoUrl.indexOf('?') == -1) {
-				gotoUrl += '?' + toMobile.value;
+				gotoUrl += '?' + toHost.mobile_val;
 			} else {
-				gotoUrl += '&' + toMobile.value;
+				gotoUrl += '&' + toHost.mobile_val;
 			}
 		}
 	} else {
-		gotoUrl += toHost;
+		gotoUrl += toHost.hostname;
 		gotoUrl += path;
 	}
-	console.log("redirecting to " + gotoUrl);
+	console.log("redirecting to " + gotoUrl + " (" + fromHost.ID + " -> " + toHost.ID + " )");
 	window.location.href = gotoUrl;
 }
