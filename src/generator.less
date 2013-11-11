@@ -1,0 +1,58 @@
+#hostSwitcherGenerator {
+	position : fixed;
+	top : 10%;
+	right : 10%;
+	width : 80%;
+	height : 80%;
+	background-color : #fff;
+	z-index : 9001;
+	overflow:hidden;
+	font-family : arial, sans-serif;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	h1 {
+		font-size : 18px;
+		color : #000;
+		display : block;
+		text-align : center;
+		padding-top : 10px;
+	}
+	ul {
+		list-style: none;
+		margin:0;
+		padding:10px;
+		max-height : 60%;
+		overflow-y : auto;
+		li {
+			position:relative;
+			border-bottom:1px solid #000;
+			margin:8px 0;
+			input {
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				border-radius: 4px;
+				padding:2px;
+				margin-bottom:4px;
+				width:80%;
+				height:20px;
+				&[name=host_mobile_value] {
+					width:40%;
+				}
+			}
+			select {
+				width:35%;
+				margin-right:5%;
+				height:20px;
+			}
+			button {
+				width: 60px;
+				height: 60px;
+				position: absolute;
+				top: 18px;
+				right: 5%;
+			}
+		}
+	}
+}
+
