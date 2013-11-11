@@ -16,12 +16,17 @@ function init() {
 		$('#hostSwitcherGenerator').append('<style type="text/css">' + css + '</style>');
 		$('<h1>Host switcher generator</h1>').appendTo('#hostSwitcherGenerator');
 		$('<ul></ul>').appendTo('#hostSwitcherGenerator');
+		$('<a href="#" class="invalid">The bookmarklet</a>').appendTo('#hostSwitcherGenerator');
+		$('<button>X</button>').appendTo('#hostSwitcherGenerator');
 
 		$item = $('<li><input placeholder="Host ID" name="host_ID" type="text" /><br /><input placeholder="Hostname" name="hostname" type="text" /><br /><select name="host_mobile_type"><option value="">Mobile Site Identifier...</option><option value="qs">QueryString</option><option value="d">Domain</option></select><input placeholder="Mobile Site Value" name="host_mobile_value" /><button>+</button></li>');
 		$item.appendTo('#hostSwitcherGenerator ul');
+
+
 		$('#hostSwitcherGenerator').on('click','ul li button',function(){
 			$item.clone().appendTo('#hostSwitcherGenerator ul');
 		});
+		$('#hostSwitcherGenerator > button').on('click',destroy);
 
 		function destroy() {
 			$('#hostSwitcherGenerator').remove();
