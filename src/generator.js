@@ -42,6 +42,7 @@ function includeJQ() {
 			console.log("Couldn't load jQuery - giving up!");
 			// should do some cleanup here...
 		} else {
+			$.noConflict();
 			init();
 		}
 	});
