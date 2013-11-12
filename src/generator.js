@@ -1,12 +1,16 @@
 var THEBOOKMARKLET = function(){/*
+// The host values must be hostnames (without protocol or trailing slashs)
+// The mobile objects are comprised of type (qs for querystring or d for subdomain) and are arranged similar to Sams, mobile theme plugin
+// for querystring use the entire string which would be used for mobile (eg 'v=m'), for subdomain use the subdomain without trailing dots (eg 'mobile')
 var HOSTS = [];
 
 var current_host = window.location.hostname;
 
+// I don't want to answer a dialog on every switch, so always just switch to the next item (or the first item from last)
 var redirected = false;
-$.each(HOSTS, function(i,el){
+for (var i=0;i<HOSTS.length;++i){
 	var next;
-	if (current_host.search(el.hostname) != -1) {
+	if (current_host.search(HOSTS[i].hostname) != -1) {
 		if (i == HOSTS.length-1) {
 			next = 0;
 		} else {
@@ -14,9 +18,9 @@ $.each(HOSTS, function(i,el){
 		}
 		redirect(HOSTS[i], HOSTS[next]);
 		redirected = true;
-		return false;
+		break;
 	}
-});
+}
 
 if (!redirected) {
 	console.log('I appear to be lost...');
@@ -49,7 +53,7 @@ function redirect(fromHost,toHost) {
 		}
 		gotoUrl += toHost.hostname;
 		gotoUrl += path;
-		if (toHost.mobile_type == 'qs') {
+		if (toHost.mobile_type == 'qs') { // TODO : fix double adding the querystring
 			if (gotoUrl.indexOf('?') == -1) {
 				gotoUrl += '?' + toHost.mobile_val;
 			} else {
@@ -63,6 +67,7 @@ function redirect(fromHost,toHost) {
 	console.log("redirecting to " + gotoUrl + " (" + fromHost.ID + " -> " + toHost.ID + " )");
 	window.location.href = gotoUrl;
 }
+
 */}.toString().slice(14,-3);
 
 window.hostSwitcherGenerator = {};
