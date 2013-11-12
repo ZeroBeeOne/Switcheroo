@@ -87,7 +87,7 @@ function init() {
 		$('<a href="#">The bookmarklet (click to refresh)</a>').appendTo('#hostSwitcherGenerator').on('click', refreshBookmarklet);
 		$('<button>X</button>').appendTo('#hostSwitcherGenerator');
 
-		$item = $('<li><input placeholder="Host ID" name="host_ID" type="text" /><br /><input placeholder="Hostname" name="hostname" type="text" /><br /><select name="host_mobile_type"><option value="">Mobile Site Identifier...</option><option value="qs">QueryString</option><option value="d">Domain</option></select><input placeholder="Mobile Site Value" name="host_mobile_value" /><button>+</button></li>');
+		$item = $('<li><input placeholder="Host ID" name="host_ID" type="text" /><br /><input placeholder="Hostname" name="hostname" type="text" /><br /><select name="host_mobile_type"><option value="">Mobile Site Identifier...</option><option value="qs">QueryString</option><option value="d">Domain</option></select><input type="text" placeholder="Mobile Site Value" name="host_mobile_value" /><button>+</button></li>');
 		$item.appendTo('#hostSwitcherGenerator ul');
 
 
