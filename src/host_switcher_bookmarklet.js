@@ -1,5 +1,3 @@
-
-
 // The host values must be hostnames (without protocol or trailing slashs)
 // The mobile objects are comprised of type (qs for querystring or d for subdomain) and are arranged similar to Sams, mobile theme plugin
 // for querystring use the entire string which would be used for mobile (eg 'v=m'), for subdomain use the subdomain without trailing dots (eg 'mobile')
@@ -8,12 +6,12 @@ var HOSTS = [
 		'ID' : 'development',
 		'hostname' : 'fill.me.in.com',
 		'mobile_type' : 'qs',
-		'mobile_val' ; 'v=m'
+		'mobile_val' : 'v=m'
 	},{
 		'ID' : 'staging',
 		'hostname' : 'fill.me.in.com',
 		'mobile_type' : 'd',
-		'mobile_val' ; 'm'
+		'mobile_val' : 'm'
 	}
 ];
 
