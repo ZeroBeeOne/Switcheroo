@@ -19,9 +19,9 @@ var current_host = window.location.hostname;
 
 // I don't want to answer a dialog on every switch, so always just switch to the next item (or the first item from last)
 var redirected = false;
-$.each(HOSTS, function(i,el){
+for (var i=0;i<HOSTS.length;++i){
 	var next;
-	if (current_host.search(el.hostname) != -1) {
+	if (current_host.search(HOSTS[i].hostname) != -1) {
 		if (i == HOSTS.length-1) {
 			next = 0;
 		} else {
@@ -29,9 +29,9 @@ $.each(HOSTS, function(i,el){
 		}
 		redirect(HOSTS[i], HOSTS[next]);
 		redirected = true;
-		return false;
+		break;
 	}
-});
+}
 
 if (!redirected) {
 	console.log('I appear to be lost...');
