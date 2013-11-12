@@ -1,3 +1,5 @@
+// Easy way to bookmarkletify this (that won't remove comments) is http://jsfiddle.net/QMeuV/1/embedded/
+(function(){
 var THEBOOKMARKLET = function(){/*
 // The host values must be hostnames (without protocol or trailing slashs)
 // The mobile objects are comprised of type (qs for querystring or d for subdomain) and are arranged similar to Sams, mobile theme plugin
@@ -307,3 +309,4 @@ function bookmarkletify(input) {
 		return s;
 	}
 }
+})();
