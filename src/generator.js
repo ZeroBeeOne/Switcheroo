@@ -1,3 +1,70 @@
+var THEBOOKMARKLET = function(){/*
+var HOSTS = [];
+
+var current_host = window.location.hostname;
+
+var redirected = false;
+$.each(HOSTS, function(i,el){
+	var next;
+	if (current_host.search(el.hostname) != -1) {
+		if (i == HOSTS.length-1) {
+			next = 0;
+		} else {
+			next = ++i;
+		}
+		redirect(HOSTS[i], HOSTS[next]);
+		redirected = true;
+		return false;
+	}
+});
+
+if (!redirected) {
+	console.log('I appear to be lost...');
+}
+
+function checkForMobile(host) {
+	switch (host.mobile_type) {
+		case 'qs':
+			return getQueryString(host.mobile_val);
+			break;
+		case 'd':
+			return (current_host == host.mobile_val + '.' + host.hostname);
+			break;
+	}
+	return false;
+}
+
+function getQueryString(qs) {
+	var url = window.location.href;
+	return (url.indexOf('?' + qs) != -1 || url.indexOf('&' + qs) != -1 );
+}
+
+function redirect(fromHost,toHost) {
+	var gotoUrl = window.location.protocol + '//',
+		path = window.location.href.replace(gotoUrl + window.location.host,'');
+	if (checkForMobile(fromHost)) {
+		if (toHost.mobile_type == 'd') {
+			// use the subdomain
+			gotoUrl += toHost.mobile_val + '.';
+		}
+		gotoUrl += toHost.hostname;
+		gotoUrl += path;
+		if (toHost.mobile_type == 'qs') {
+			if (gotoUrl.indexOf('?') == -1) {
+				gotoUrl += '?' + toHost.mobile_val;
+			} else {
+				gotoUrl += '&' + toHost.mobile_val;
+			}
+		}
+	} else {
+		gotoUrl += toHost.hostname;
+		gotoUrl += path;
+	}
+	console.log("redirecting to " + gotoUrl + " (" + fromHost.ID + " -> " + toHost.ID + " )");
+	window.location.href = gotoUrl;
+}
+*/}.toString().slice(14,-3);
+
 window.hostSwitcherGenerator = {};
 
 window.hostSwitcherGenerator.root = document.createElement('div');
