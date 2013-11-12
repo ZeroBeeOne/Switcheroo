@@ -84,7 +84,7 @@ function init() {
 		$('#hostSwitcherGenerator').append('<style scoped type="text/css">' + css + '</style>');
 		$('<h1>Host switcher generator</h1>').appendTo('#hostSwitcherGenerator');
 		$('<ul></ul>').appendTo('#hostSwitcherGenerator');
-		$('<a href="#" class="invalid">The bookmarklet</a>').appendTo('#hostSwitcherGenerator');
+		$('<a href="#">The bookmarklet (click to refresh)</a>').appendTo('#hostSwitcherGenerator').on('click', refreshBookmarklet);
 		$('<button>X</button>').appendTo('#hostSwitcherGenerator');
 
 		$item = $('<li><input placeholder="Host ID" name="host_ID" type="text" /><br /><input placeholder="Hostname" name="hostname" type="text" /><br /><select name="host_mobile_type"><option value="">Mobile Site Identifier...</option><option value="qs">QueryString</option><option value="d">Domain</option></select><input placeholder="Mobile Site Value" name="host_mobile_value" /><button>+</button></li>');
