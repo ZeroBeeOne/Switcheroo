@@ -81,7 +81,7 @@ function init() {
 	(function($) {
 		$('style:not([disabled]), link[rel=stylesheet]:not([disabled])').attr('data-disabled-by-hostSwitcher', true).disable();
 		var css = '#hostSwitcherGenerator{position:fixed;top:10%;right:10%;width:80%;height:80%;background-color:#fff;z-index:9001;overflow:hidden;font-family:arial,sans-serif;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px}#hostSwitcherGenerator h1{font-size:18px;color:#000;display:block;text-align:center;padding-top:10px}#hostSwitcherGenerator ul{list-style:none;margin:0;padding:10px;max-height:60%;overflow-y:auto}#hostSwitcherGenerator ul li{position:relative;border-bottom:1px solid #000;margin:8px 0}#hostSwitcherGenerator ul li input{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding:2px;margin-bottom:4px;width:80%;height:20px}#hostSwitcherGenerator ul li input[name=host_mobile_value]{width:40%}#hostSwitcherGenerator ul li select{width:35%;margin-right:5%;height:20px}#hostSwitcherGenerator ul li button{width:60px;height:60px;position:absolute;top:18px;right:5%}';
-		$('#hostSwitcherGenerator').append('<style type="text/css">' + css + '</style>');
+		$('#hostSwitcherGenerator').append('<style scoped type="text/css">' + css + '</style>');
 		$('<h1>Host switcher generator</h1>').appendTo('#hostSwitcherGenerator');
 		$('<ul></ul>').appendTo('#hostSwitcherGenerator');
 		$('<a href="#" class="invalid">The bookmarklet</a>').appendTo('#hostSwitcherGenerator');
