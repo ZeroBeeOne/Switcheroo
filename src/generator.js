@@ -96,10 +96,28 @@ function init() {
 		});
 		$('#hostSwitcherGenerator > button').on('click',destroy);
 
-		function destroy() {
+		function destroy() { // TODO should I perhaps be doing this on clickoutside too?
 			$('#hostSwitcherGenerator').remove();
 			$('style[data-disabled-by-hostSwitcher], link[rel=stylesheet][data-disabled-by-hostSwitcher]').enable().removeAttr('data-disabled-by-hostSwitcher');
 		}
+		function refreshBookmarklet(event) {
+			var HOSTS = [], bmString;
+
+			$('#hostSwitcherGenerator ul li').each(function(i,el){
+				var thisRow = {};
+				thisRow.ID = $('[name=host_ID]', el).val();
+				thisRow.hostname = $('[name=hostname]', el).val();
+				thisRow.mobile_type = $('[name=host_mobile_type]', el).val();
+				thisRow.mobile_val = $('[name=host_mobile_value]', el).val();
+				// TODO : some validation could go here to make sure the values have been entered, and are sane, but what am I gonna do, injection attack myself?
+				HOSTS.push(thisRow);
+			});
+			bmString = THEBOOKMARKLET.replace("var HOSTS = [];", "var HOSTS = " + JSON.stringify(HOSTS) + ";");
+			bmString = bookmarkletify(bmString);
+			$('#hostSwitcherGenerator > a').attr("href",bmString);
+			event.preventDefault();
+		}
+
 	})(jQuery);
 }
 
